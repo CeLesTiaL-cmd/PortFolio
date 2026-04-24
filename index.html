@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anik Biswas | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .nav-link { position:relative; padding-bottom:3px; transition:color 0.2s; }
+    .nav-link::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:#1d4ed8; transition:width 0.3s; }
+    .nav-link:hover::after { width:100%; }
+    .nav-link:hover { color:#1d4ed8; }
+    .skill-card { transition:transform 0.25s, box-shadow 0.25s; }
+    .skill-card:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.1); }
+    .proj-card { transition:transform 0.25s, box-shadow 0.25s; }
+    .proj-card:hover { transform:translateY(-5px); box-shadow:0 12px 30px rgba(0,0,0,0.12); }
+    .fade-in { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; }
+    .fade-in.show { opacity:1; transform:translateY(0); }
+    .typed::after { content:'|'; animation:blink 0.8s infinite; color:#1d4ed8; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  </style>
+</head>
+<body class="bg-white text-gray-800" style="font-family:'Segoe UI',sans-serif;">
+
+  <!-- NAVBAR -->
+  <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-blue-700 tracking-wide">Anik<span class="text-gray-800">.</span></h1>
+      <ul class="flex gap-8 text-sm font-medium text-gray-600">
+        <li><a href="#home"     class="nav-link">Home</a></li>
+        <li><a href="#about"    class="nav-link">About</a></li>
+        <li><a href="#skills"   class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact"  class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="min-h-screen flex items-center px-8 bg-gray-50">
+    <div class="max-w-5xl mx-auto w-full flex flex-col md:flex-row items-center gap-12 py-16">
+      <div class="flex-1">
+        <p class="text-blue-700 text-sm font-semibold tracking-widest uppercase mb-3">Hello, I'm</p>
+        <h1 class="text-6xl font-extrabold text-gray-900 leading-tight mb-3">Anik<br/>Biswas</h1>
+        <p id="typed-text" class="text-xl text-gray-500 mb-6 typed h-7"></p>
+        <p class="text-gray-500 text-sm mb-8 max-w-sm leading-relaxed">
+          CSE student at <span class="text-blue-700 font-semibold">IIUC, Chittagong</span>. I love coding and building things with code.
+        </p>
+        <div class="flex gap-3">
+          <a href="#projects" class="bg-blue-700 text-white px-7 py-3 rounded-lg text-sm font-bold hover:bg-blue-800 transition">View Projects</a>
+          <a href="#contact"  class="border border-blue-700 text-blue-700 px-7 py-3 rounded-lg text-sm font-bold hover:bg-blue-50 transition">Contact Me</a>
+        </div>
+      </div>
+      <div class="flex-1 flex justify-center">
+        <img
+          src="https://images.unsplash.com/photo-1605379399642-870262d3d051"
+          alt="Anik Biswas"
+          class="w-64 h-64 rounded-2xl object-cover shadow-2xl border-4 border-white"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-20 px-8 bg-white fade-in">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-blue-700 text-xs font-bold tracking-widest uppercase text-center mb-2">Who I Am</p>
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">About Me</h2>
+      <div class="flex flex-col md:flex-row gap-12 items-center">
+        <div class="flex-1 text-gray-600 leading-relaxed text-sm">
+          <p class="mb-4">My name is <strong class="text-gray-900">Anik Biswas</strong>. I am a student of <strong class="text-gray-900">Computer Science & Engineering (CSE)</strong> at <strong class="text-blue-700">International Islamic University Chittagong (IIUC)</strong>. I am from <strong class="text-gray-900">Chittagong, Bangladesh</strong>.</p>
+          <p class="mb-4">I started learning programming with <strong>C and C++</strong>. After that I learned <strong>Java</strong>. Now I am learning web development with <strong>HTML and CSS</strong>. I also know some basic <strong>Python</strong>.</p>
+          <p>My goal is to become a good software engineer in the future. 🎯</p>
+        </div>
+        <div class="flex-1 grid grid-cols-2 gap-4">
+          <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+            <p class="text-3xl font-extrabold text-blue-700">6+</p>
+            <p class="text-xs text-gray-500 mt-1">Languages Known</p>
+          </div>
+          <div class="bg-gray-50 border border-gray-100 rounded-xl p-5 text-center">
+            <p class="text-3xl font-extrabold text-gray-800">2+</p>
+            <p class="text-xs text-gray-500 mt-1">Projects Done</p>
+          </div>
+          <div class="bg-gray-50 border border-gray-100 rounded-xl p-5 text-center">
+            <p class="text-3xl font-extrabold text-gray-800">IIUC</p>
+            <p class="text-xs text-gray-500 mt-1">University</p>
+          </div>
+          <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+            <p class="text-3xl font-extrabold text-blue-700">CTG</p>
+            <p class="text-xs text-gray-500 mt-1">Chittagong, BD</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="py-20 px-8 bg-gray-50 fade-in">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-blue-700 text-xs font-bold tracking-widest uppercase text-center mb-2">What I Know</p>
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">My Skills</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
+
+        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-bold text-gray-800">C</span>
+            <span class="text-blue-700 text-sm font-bold">75%</span>
+          </div>
+          <div class="w-full bg-gray-100 rounded-full h-2">
+            <div class="bg-blue-700 h-2 rounded-full" style="width:75%"></div>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">Intermediate</p>
+        </div>
+
+        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-bold text-gray-800">C++</span>
+            <span class="text-blue-700 text-sm font-bold">65%</span>
+          </div>
+          <div class="w-full bg-gray-100 rounded-full h-2">
+            <div class="bg-blue-700 h-2 rounded-full" style="width:65%"></div>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">Intermediate</p>
+        </div>
+
+        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-bold text-gray-800">Java</span>
+            <span class="text-blue-700 text-sm font-bold">55%</span>
+          </div>
+          <div class="w-full bg-gray-100 rounded-full h-2">
+            <div class="bg-blue-700 h-2 rounded-full" style="width:55%"></div>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">Beginner</p>
+        </div>
+
+        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-bold text-gray-800">HTML</span>
+            <span class="text-blue-700 text-sm font-bold">80%</span>
+          </div>
+          <div class="w-full bg-gray-100 rounded-full h-2">
+            <div class="bg-blue-700 h-2 rounded-full" style="width:80%"></div>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">Good</p>
+        </div>
+
+        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-bold text-gray-800">CSS</span>
+            <span class="text-blue-700 text-sm font-bold">70%</span>
+          </div>
+          <div class="w-full bg-gray-100 rounded-full h-2">
+            <div class="bg-blue-700 h-2 rounded-full" style="width:70%"></div>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">Intermediate</p>
+        </div>
+
+        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-bold text-gray-800">Python</span>
+            <span class="text-blue-700 text-sm font-bold">50%</span>
+          </div>
+          <div class="w-full bg-gray-100 rounded-full h-2">
+            <div class="bg-blue-700 h-2 rounded-full" style="width:50%"></div>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">Beginner</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="py-20 px-8 bg-white fade-in">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-blue-700 text-xs font-bold tracking-widest uppercase text-center mb-2">What I Built</p>
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">My Projects</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <div class="proj-card bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=250&fit=crop" alt="E-Commerce" class="w-full h-44 object-cover"/>
+          <div class="p-6">
+            <h3 class="text-gray-900 font-bold text-lg mb-2">E-Commerce Website</h3>
+            <p class="text-gray-500 text-sm mb-4">A simple online shopping website with product listing, search bar, and add to cart. Built using HTML and CSS.</p>
+            <div class="flex gap-2 flex-wrap">
+              <span class="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium border border-blue-100">HTML</span>
+              <span class="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium border border-blue-100">CSS</span>
+              <span class="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium border border-blue-100">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=250&fit=crop" alt="Portfolio" class="w-full h-44 object-cover"/>
+          <div class="p-6">
+            <h3 class="text-gray-900 font-bold text-lg mb-2">Portfolio Website</h3>
+            <p class="text-gray-500 text-sm mb-4">My personal portfolio built with Tailwind CSS. Shows my skills, projects and contact info.</p>
+            <div class="flex gap-2 flex-wrap">
+              <span class="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium border border-blue-100">HTML</span>
+              <span class="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium border border-blue-100">Tailwind CSS</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-20 px-8 bg-gray-50 fade-in">
+    <div class="max-w-xl mx-auto">
+      <p class="text-blue-700 text-xs font-bold tracking-widest uppercase text-center mb-2">Get In Touch</p>
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Contact Me</h2>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div class="mb-4">
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Your Name</label>
+          <input id="c-name" type="text" placeholder="Enter your name" class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-blue-500 bg-gray-50"/>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Your Email</label>
+          <input id="c-email" type="email" placeholder="Enter your email" class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-blue-500 bg-gray-50"/>
+        </div>
+        <div class="mb-5">
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Message</label>
+          <textarea id="c-msg" rows="4" placeholder="Write your message..." class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-blue-500 bg-gray-50 resize-none"></textarea>
+        </div>
+        <button onclick="sendMessage()" class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg hover:bg-blue-800 transition text-sm">
+          Send Message ✉️
+        </button>
+        <p id="success-msg" class="text-green-600 text-center font-semibold mt-3 hidden">✅ Message sent successfully!</p>
+        <p id="error-msg"   class="text-red-500   text-center font-semibold mt-3 hidden">⚠️ Please fill all fields first.</p>
+      </div>
+      <div class="flex justify-center gap-10 mt-8 text-sm text-gray-500 text-center">
+        <div><p class="text-blue-700 text-lg mb-1">📧</p><p>anikbiswas@gmail.com</p></div>
+        <div><p class="text-blue-700 text-lg mb-1">📍</p><p>Chittagong, BD</p></div>
+        <div><p class="text-blue-700 text-lg mb-1">🎓</p><p>IIUC — CSE</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-gray-400 text-center py-6 text-sm">
+    <p>Made by <span class="text-white font-semibold">Anik Biswas</span> — CSE Student, IIUC Chittagong</p>
+    <p class="text-xs mt-1 text-gray-600">&copy; 2025. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Typing animation
+    var phrases = ["CSE Student at IIUC 🎓", "Web Developer (Learning) 💻", "From Chittagong, BD 🇧🇩"];
+    var pi = 0, ci = 0, deleting = false;
+    function type() {
+      var el = document.getElementById("typed-text");
+      var word = phrases[pi];
+      el.textContent = deleting ? word.substring(0, ci--) : word.substring(0, ci++);
+      if (!deleting && ci === word.length + 1) { deleting = true; setTimeout(type, 1400); return; }
+      if (deleting && ci === 0)               { deleting = false; pi = (pi + 1) % phrases.length; }
+      setTimeout(type, deleting ? 55 : 95);
+    }
+    type();
+
+    // Scroll fade-in
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add("show"); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".fade-in").forEach(function(el) { obs.observe(el); });
+
+    // Active nav highlight
+    window.addEventListener("scroll", function() {
+      var current = "";
+      document.querySelectorAll("section").forEach(function(s) {
+        if (window.scrollY >= s.offsetTop - 90) current = s.id;
+      });
+      document.querySelectorAll(".nav-link").forEach(function(a) {
+        a.style.color = a.getAttribute("href") === "#" + current ? "#1d4ed8" : "";
+      });
+    });
+
+    // Contact form
+    function sendMessage() {
+      var name  = document.getElementById("c-name").value.trim();
+      var email = document.getElementById("c-email").value.trim();
+      var msg   = document.getElementById("c-msg").value.trim();
+      var ok  = document.getElementById("success-msg");
+      var err = document.getElementById("error-msg");
+      if (!name || !email || !msg) {
+        err.classList.remove("hidden"); ok.classList.add("hidden");
+        setTimeout(function(){ err.classList.add("hidden"); }, 3000);
+        return;
+      }
+      ok.classList.remove("hidden"); err.classList.add("hidden");
+      document.getElementById("c-name").value = "";
+      document.getElementById("c-email").value = "";
+      document.getElementById("c-msg").value = "";
+      setTimeout(function(){ ok.classList.add("hidden"); }, 3000);
+    }
+  </script>
+</body>
+</html>

@@ -32,6 +32,7 @@ body{
   html{ scroll-behavior:auto; }
   *{ transition:none !important; }
   .reveal{ opacity:1 !important; transform:none !important; }
+  #hero .avatar, #hero h1, #hero .role, #hero .desc, #hero .hero-links{ opacity:1 !important; transform:none !important; }
 }
 a{ color:var(--accent); text-decoration:none; }
 a:hover{ text-decoration:underline; }
@@ -59,6 +60,17 @@ a:hover{ text-decoration:underline; }
 /* Scroll reveal */
 .reveal{ opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease; }
 .reveal.show{ opacity:1; transform:none; }
+
+/* Hero: children reveal in sequence rather than all at once */
+#hero.reveal{ opacity:1; transform:none; }
+#hero .avatar, #hero h1, #hero .role, #hero .desc, #hero .hero-links{
+  opacity:0; transform:translateY(14px); transition:opacity .45s ease, transform .45s ease;
+}
+#hero.show .avatar{ opacity:1; transform:none; transition-delay:.05s; }
+#hero.show h1{ opacity:1; transform:none; transition-delay:.15s; }
+#hero.show .role{ opacity:1; transform:none; transition-delay:.25s; }
+#hero.show .desc{ opacity:1; transform:none; transition-delay:.35s; }
+#hero.show .hero-links{ opacity:1; transform:none; transition-delay:.45s; }
 
 main{ padding-top:10px; }
 .block{ padding:52px 0; border-bottom:1px solid var(--border); }
@@ -96,18 +108,29 @@ code{
 .project-carousel::-webkit-scrollbar-thumb{ background:var(--border); border-radius:3px; }
 .project-card{
   flex:0 0 220px; scroll-snap-align:start; background:var(--code-bg); border:1px solid var(--border);
-  border-radius:5px; padding:18px; cursor:pointer; transition:border-color .15s ease, transform .15s ease;
+  border-radius:5px; overflow:hidden; cursor:pointer; transition:border-color .15s ease, transform .15s ease;
 }
 .project-card:hover{ border-color:var(--accent); }
 .project-card.active{ border-color:var(--accent-2); }
+.project-card .card-body{ padding:16px; }
 .project-card .pname{ font-weight:700; display:block; margin-bottom:6px; color:var(--text); }
 .project-card .pname .flag{ color:var(--accent); font-size:11px; font-weight:400; margin-left:6px; }
 .project-card p{ color:var(--muted); font-size:13px; margin:0 0 10px; }
 .project-card .tag-row{ margin-bottom:0; }
 
+.thumb{
+  aspect-ratio:16/10; overflow:hidden; background:var(--code-bg); border-bottom:1px solid var(--border);
+}
+.thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease; }
+.project-card:hover .thumb img{ transform:scale(1.08); }
+.thumb-placeholder{ display:flex; align-items:center; justify-content:center; }
+.thumb-placeholder span{ font-size:32px; font-weight:700; color:var(--accent); }
+.detail-thumb{ border-radius:5px 5px 0 0; aspect-ratio:16/8; margin:-24px -24px 20px; width:calc(100% + 48px); }
+.detail-thumb.thumb-placeholder{ background:var(--code-bg); }
+
 .project-detail-panel{
   border:1px solid var(--border); border-radius:5px; padding:24px; background:var(--bg);
-  opacity:0; transform:translateY(6px); transition:opacity .2s ease, transform .2s ease;
+  overflow:hidden; opacity:0; transform:translateY(6px); transition:opacity .2s ease, transform .2s ease;
 }
 .project-detail-panel.show{ opacity:1; transform:none; }
 .project-detail-panel h3{ margin:0 0 4px; font-size:17px; }
@@ -176,7 +199,7 @@ code{
         id="avatar"
         class="avatar"
         alt="Anik Biswas"
-        src="https://raw.githubusercontent.com/CeLesTiaL-cmd/REPLACE_WITH_REPO/main/assets/anik.jpg"
+        src="anik.jpeg"
         onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Anik+Biswas&size=160&background=16181c&color=e8a33d&bold=true'"
       />
       <h1 id="heroName"></h1>
@@ -276,6 +299,7 @@ const DATA = {
     {
       name: "Stacks",
       current: true,
+      image: null,
       description: "A repository platform for research papers, publications, and code projects.",
       detail: "Stacks is a MERN-based repository platform for gathering thesis papers, research publications, and code projects across academic and industry sectors — a single place to publish and discover work, the way developers publish on GitHub.",
       highlights: [
@@ -289,6 +313,7 @@ const DATA = {
     },
     {
       name: "Notaloy",
+      image: "notaloy.jpg",
       description: "A note-taking web app with a clean, fast interface.",
       detail: "Notaloy is a note-taking web app focused on speed — create, edit, and organize notes with as little friction as possible.",
       highlights: ["Clean, distraction-free interface", "Rapid-prototyped and shipped end to end"],
@@ -298,6 +323,7 @@ const DATA = {
     },
     {
       name: "Crafio",
+      image: "crafio.jpg",
       description: "A creative web project exploring layout and interaction.",
       detail: "Crafio is a creative web project built to explore layout and interaction design outside a strict use case.",
       highlights: ["Focus on visual polish over feature count", "Rapid-prototyped and shipped end to end"],
@@ -307,6 +333,7 @@ const DATA = {
     },
     {
       name: "ShopEasy",
+      image: "ec.jpg",
       description: "An online shopping site built from scratch.",
       detail: "ShopEasy is a functional online shopping site — product listings, a search bar, and a working cart — built without any framework.",
       highlights: ["Vanilla HTML, CSS, and JavaScript — no framework", "Product search and cart logic built by hand"],
@@ -400,6 +427,13 @@ function renderSkills() {
    Projects: swipeable carousel + shared detail panel
    ------------------------------------------------------------ */
 
+function thumbHTML(p, extraClass) {
+  if (p.image) {
+    return `<div class="thumb ${extraClass || ""}"><img src="${p.image}" alt="${p.name} screenshot" loading="lazy" onerror="this.parentElement.classList.add('thumb-placeholder');this.remove();" /></div>`;
+  }
+  return `<div class="thumb thumb-placeholder ${extraClass || ""}"><span>${p.name.charAt(0)}</span></div>`;
+}
+
 function renderProjects() {
   const carousel = document.getElementById("projectCarousel");
   const panel = document.getElementById("projectDetailPanel");
@@ -408,9 +442,12 @@ function renderProjects() {
     .map(
       (p, i) => `
       <div class="project-card" data-index="${i}">
-        <span class="pname">${p.name}${p.current ? '<span class="flag">current</span>' : ""}</span>
-        <p>${p.description}</p>
-        <div class="tag-row">${p.tags.slice(0, 3).map((t) => `<code>${t}</code>`).join("")}</div>
+        ${thumbHTML(p)}
+        <div class="card-body">
+          <span class="pname">${p.name}${p.current ? '<span class="flag">current</span>' : ""}</span>
+          <p>${p.description}</p>
+          <div class="tag-row">${p.tags.slice(0, 3).map((t) => `<code>${t}</code>`).join("")}</div>
+        </div>
       </div>`
     )
     .join("");
@@ -452,13 +489,16 @@ function showProjectDetail(project) {
   const panel = document.getElementById("projectDetailPanel");
   panel.classList.remove("show");
   panel.innerHTML = `
-    <h3>${project.name}${project.current ? '<span class="flag">current</span>' : ""}</h3>
-    <p class="detail-text">${project.detail}</p>
-    <ul>${project.highlights.map((h) => `<li>${h}</li>`).join("")}</ul>
-    <div class="tag-row">${project.tags.map((t) => `<code>${t}</code>`).join("")}</div>
-    <div class="links">
-      ${project.live ? `<a class="plink" href="${project.live}" target="_blank" rel="noopener noreferrer">live demo →</a>` : ""}
-      ${project.source ? `<a class="plink" href="${project.source}" target="_blank" rel="noopener noreferrer">source →</a>` : ""}
+    ${thumbHTML(project, "detail-thumb")}
+    <div class="detail-body">
+      <h3>${project.name}${project.current ? '<span class="flag">current</span>' : ""}</h3>
+      <p class="detail-text">${project.detail}</p>
+      <ul>${project.highlights.map((h) => `<li>${h}</li>`).join("")}</ul>
+      <div class="tag-row">${project.tags.map((t) => `<code>${t}</code>`).join("")}</div>
+      <div class="links">
+        ${project.live ? `<a class="plink" href="${project.live}" target="_blank" rel="noopener noreferrer">live demo →</a>` : ""}
+        ${project.source ? `<a class="plink" href="${project.source}" target="_blank" rel="noopener noreferrer">source →</a>` : ""}
+      </div>
     </div>
   `;
   // restart the transition so switching projects always animates in

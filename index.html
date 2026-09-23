@@ -1,551 +1,584 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Anik Biswas | Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    html { scroll-behavior: smooth; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anik Biswas — Full-Stack Developer</title>
+<meta name="description" content="Portfolio of Anik Biswas — CSE student at IIUC, full-stack developer working with the MERN stack, and competitive programmer." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#0d0f12;
+  --text:#e6e8eb;
+  --muted:#868c99;
+  --border:#24262b;
+  --accent:#e8a33d;
+  --accent2:#5fd4d0;
+  --code-bg:#16181c;
+  --maxw:680px;
+  --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
 
-    /* ── NAV ── */
-    .nav-link { position:relative; padding-bottom:3px; transition:color 0.2s; }
-    .nav-link::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:#1d4ed8; transition:width 0.3s; }
-    .nav-link:hover::after { width:100%; }
-    .nav-link:hover { color:#1d4ed8; }
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:var(--mono); font-size:15px; line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *{ transition:none !important; }
+  .reveal{ opacity:1 !important; transform:none !important; }
+}
+a{ color:var(--accent); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+:focus-visible{ outline:1px solid var(--accent); outline-offset:2px; }
 
-    /* ── CARDS ── */
-    .skill-card { transition:transform 0.25s, box-shadow 0.25s; }
-    .skill-card:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.1); }
-    .proj-card { transition:transform 0.25s, box-shadow 0.25s; }
-    .proj-card:hover { transform:translateY(-5px); box-shadow:0 12px 30px rgba(0,0,0,0.12); }
+.page{ max-width:var(--maxw); margin:0 auto; padding:0 20px; }
 
-    /* ── FADE IN ── */
-    .fade-in { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.show { opacity:1; transform:translateY(0); }
+/* Header + logo */
+.site-header{
+  position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+  gap:10px 16px; padding:16px 0; z-index:10;
+}
+.site-nav{ display:flex; gap:14px; flex-wrap:wrap; font-size:13.5px; order:1; }
+.site-nav a{ color:var(--muted); }
+.site-nav a:hover{ color:var(--text); text-decoration:none; }
+.site-nav a.active{ color:var(--accent); }
+.logo{ display:flex; align-items:center; font-weight:700; color:var(--text); order:2; }
+.logo:hover{ text-decoration:none; }
+.logo-mark{
+  background:var(--accent); color:#1a1400; width:22px; height:22px; display:inline-flex;
+  align-items:center; justify-content:center; border-radius:5px; font-size:13px; margin-right:5px;
+}
 
-    /* ── TYPED ── */
-    .typed::after { content:'|'; animation:blink 0.8s infinite; color:#1d4ed8; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+/* Scroll reveal */
+.reveal{ opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease; }
+.reveal.show{ opacity:1; transform:none; }
 
-    /* ── MOBILE MENU ── */
-    #mobile-menu { transition: max-height 0.35s ease, opacity 0.3s ease; max-height:0; overflow:hidden; opacity:0; }
-    #mobile-menu.open { max-height:400px; opacity:1; }
+main{ padding-top:10px; }
+.block{ padding:52px 0; border-bottom:1px solid var(--border); }
+.block:last-of-type{ border-bottom:none; }
 
-    /* ── SOCIAL LINK HOVER ── */
-    .social-link { transition:transform 0.2s, background 0.2s; }
-    .social-link:hover { transform:translateY(-3px); }
-  </style>
+.avatar{ width:64px; height:64px; border-radius:50%; object-fit:cover; border:2px solid var(--border); margin-bottom:18px; display:block; }
+h1{ font-size:26px; margin:0 0 10px; }
+h2{ font-size:15px; color:var(--accent); margin:0 0 24px; font-weight:600; }
+.role{ color:var(--muted); margin:0 0 16px; }
+.desc{ max-width:60ch; margin:0 0 20px; }
+.hero-links{ margin:0; }
+
+.fact-list{ display:grid; grid-template-columns:max-content 1fr; gap:8px 24px; margin-top:22px; font-size:14px; }
+.fact-list dt{ color:var(--muted); }
+.fact-list dd{ margin:0; }
+
+code{
+  background:var(--code-bg); border:1px solid var(--border); border-radius:3px;
+  padding:2px 6px; font-size:12.5px; font-family:var(--mono); color:var(--text);
+}
+
+.skill-row{ display:flex; gap:14px; margin-bottom:12px; flex-wrap:wrap; }
+.skill-row .label{ color:var(--muted); min-width:170px; font-size:13.5px; }
+.skill-row .items{ display:flex; flex-wrap:wrap; gap:6px; }
+
+/* Swipeable project carousel */
+.section-hint{ color:var(--muted); font-size:13px; margin:-16px 0 22px; }
+.project-carousel{
+  display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory;
+  padding-bottom:14px; margin-bottom:6px; -webkit-overflow-scrolling:touch;
+  cursor:grab; scrollbar-width:thin; scrollbar-color:var(--border) transparent;
+}
+.project-carousel:active{ cursor:grabbing; }
+.project-carousel::-webkit-scrollbar{ height:5px; }
+.project-carousel::-webkit-scrollbar-thumb{ background:var(--border); border-radius:3px; }
+.project-card{
+  flex:0 0 220px; scroll-snap-align:start; background:var(--code-bg); border:1px solid var(--border);
+  border-radius:5px; padding:18px; cursor:pointer; transition:border-color .15s ease, transform .15s ease;
+}
+.project-card:hover{ border-color:var(--accent); }
+.project-card.active{ border-color:var(--accent-2); }
+.project-card .pname{ font-weight:700; display:block; margin-bottom:6px; color:var(--text); }
+.project-card .pname .flag{ color:var(--accent); font-size:11px; font-weight:400; margin-left:6px; }
+.project-card p{ color:var(--muted); font-size:13px; margin:0 0 10px; }
+.project-card .tag-row{ margin-bottom:0; }
+
+.project-detail-panel{
+  border:1px solid var(--border); border-radius:5px; padding:24px; background:var(--bg);
+  opacity:0; transform:translateY(6px); transition:opacity .2s ease, transform .2s ease;
+}
+.project-detail-panel.show{ opacity:1; transform:none; }
+.project-detail-panel h3{ margin:0 0 4px; font-size:17px; }
+.project-detail-panel .flag{ color:var(--accent); font-size:11px; margin-left:8px; }
+.project-detail-panel p.detail-text{ font-size:14px; margin:10px 0 14px; color:var(--text); }
+.project-detail-panel ul{ margin:0 0 14px; padding-left:20px; }
+.project-detail-panel li{ font-size:13.5px; margin-bottom:6px; color:var(--muted); }
+.tag-row{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+.plink{ margin-right:16px; font-size:13.5px; }
+
+.coursework{ margin-top:30px; }
+.coursework .label{ color:var(--muted); font-size:13px; margin:0 0 12px; }
+.coursework ul{ list-style:none; margin:0; padding:0; }
+.coursework li{ font-size:14px; margin-bottom:10px; color:var(--muted); }
+.coursework li strong{ color:var(--text); }
+
+.changelog-entry{ margin-bottom:26px; }
+.changelog-entry:last-child{ margin-bottom:0; }
+.changelog-date{ color:var(--accent); font-size:13.5px; font-weight:600; margin-bottom:6px; }
+.changelog-entry ul{ margin:0; padding-left:20px; }
+.changelog-entry li{ font-size:14px; margin-bottom:4px; }
+
+.plain-list{ list-style:none; margin:0; padding:0; }
+.plain-list li{ margin-bottom:8px; font-size:14px; }
+.plain-list .handle{ color:var(--muted); }
+
+.contact-form{ display:flex; flex-direction:column; gap:4px; max-width:440px; }
+.contact-form label{ color:var(--muted); font-size:13px; margin-top:14px; }
+.contact-form input, .contact-form textarea{
+  background:var(--code-bg); border:1px solid var(--border); color:var(--text);
+  font-family:var(--mono); font-size:14px; padding:9px 11px; border-radius:3px;
+}
+.contact-form input:focus, .contact-form textarea:focus{ border-color:var(--accent); outline:none; }
+.contact-form button{
+  margin-top:18px; align-self:flex-start; background:transparent; border:1px solid var(--accent);
+  color:var(--accent); font-family:var(--mono); font-size:14px; padding:9px 22px; border-radius:3px; cursor:pointer;
+}
+.contact-form button:hover{ background:var(--accent); color:#1a1400; }
+.form-status{ font-size:13px; margin-top:10px; min-height:16px; }
+.form-status.ok{ color:#57c785; }
+.form-status.err{ color:#e2685a; }
+
+.site-footer{ display:flex; gap:20px; color:var(--muted); font-size:12px; padding:24px 0 60px; }
+
+</style>
 </head>
-<body class="bg-white text-gray-800" style="font-family:'Segoe UI',sans-serif;">
+<body>
+<div class="page">
 
-  <!-- ════════════════════════════════════════════
-       NAVBAR
-  ════════════════════════════════════════════ -->
-  <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold text-blue-700 tracking-wide">Anik<span class="text-gray-800">.</span></h1>
+  <header class="site-header" id="top">
+    <nav class="site-nav" id="siteNav">
+      <a href="#about" data-target="about">about</a>
+      <a href="#skills" data-target="skills">skills</a>
+      <a href="#projects" data-target="projects">projects</a>
+      <a href="#changelog" data-target="changelog">changelog</a>
+      <a href="#connect" data-target="connect">connect</a>
+      <a href="#contact" data-target="contact">contact</a>
+    </nav>
+    <a href="#top" class="logo"><span class="logo-mark">A</span>nik</a>
+  </header>
 
-      <!-- Desktop Nav -->
-      <ul class="hidden md:flex gap-8 text-sm font-medium text-gray-600">
-        <li><a href="#home"     class="nav-link">Home</a></li>
-        <li><a href="#about"    class="nav-link">About</a></li>
-        <li><a href="#skills"   class="nav-link">Skills</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#profiles" class="nav-link">Profiles</a></li>
-        <li><a href="#contact"  class="nav-link">Contact</a></li>
-      </ul>
+  <main>
 
-      <!-- Hamburger -->
-      <button id="burger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
-        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 block" id="b1"></span>
-        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 block" id="b2"></span>
-        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 block" id="b3"></span>
-      </button>
-    </div>
+    <section id="hero" class="block reveal">
+      <img
+        id="avatar"
+        class="avatar"
+        alt="Anik Biswas"
+        src="https://raw.githubusercontent.com/CeLesTiaL-cmd/REPLACE_WITH_REPO/main/assets/anik.jpg"
+        onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Anik+Biswas&size=160&background=16181c&color=e8a33d&bold=true'"
+      />
+      <h1 id="heroName"></h1>
+      <p class="role" id="heroRole"></p>
+      <p class="desc" id="heroDesc"></p>
+      <p class="hero-links">
+        <a href="#projects">View projects →</a> &nbsp; <a href="#contact">Get in touch →</a>
+      </p>
+    </section>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-100">
-      <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium text-gray-600">
-        <li><a href="#home"     class="nav-link" onclick="closeMobile()">Home</a></li>
-        <li><a href="#about"    class="nav-link" onclick="closeMobile()">About</a></li>
-        <li><a href="#skills"   class="nav-link" onclick="closeMobile()">Skills</a></li>
-        <li><a href="#projects" class="nav-link" onclick="closeMobile()">Projects</a></li>
-        <li><a href="#profiles" class="nav-link" onclick="closeMobile()">Profiles</a></li>
-        <li><a href="#contact"  class="nav-link" onclick="closeMobile()">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+    <section id="about" class="block reveal">
+      <h2>## about</h2>
+      <p id="aboutBio"></p>
+      <dl class="fact-list" id="factList"></dl>
+    </section>
 
+    <section id="skills" class="block reveal">
+      <h2>## skills</h2>
+      <div id="skillRows"></div>
+    </section>
 
-  <!-- ════════════════════════════════════════════
-       HERO
-  ════════════════════════════════════════════ -->
-  <section id="home" class="min-h-screen flex items-center px-6 bg-gray-50">
-    <div class="max-w-5xl mx-auto w-full flex flex-col-reverse md:flex-row items-center gap-10 py-16">
-
-      <div class="flex-1 text-center md:text-left">
-        <p class="text-blue-700 text-sm font-semibold tracking-widest uppercase mb-3">Hello, I'm</p>
-        <h1 class="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight mb-3">Anik<br/>Biswas</h1>
-        <p id="typed-text" class="text-xl text-gray-500 mb-6 typed h-7"></p>
-        <p class="text-gray-500 text-sm mb-8 max-w-sm mx-auto md:mx-0 leading-relaxed">
-          CSE student at <span class="text-blue-700 font-semibold">IIUC, Chittagong</span>. I love coding and building things with code.
-        </p>
-        <div class="flex gap-3 justify-center md:justify-start flex-wrap">
-          <a href="#projects" class="bg-blue-700 text-white px-7 py-3 rounded-lg text-sm font-bold hover:bg-blue-800 transition">View Projects</a>
-          <a href="#contact"  class="border border-blue-700 text-blue-700 px-7 py-3 rounded-lg text-sm font-bold hover:bg-blue-50 transition">Contact Me</a>
-        </div>
+    <section id="projects" class="block reveal">
+      <h2>## projects</h2>
+      <p class="section-hint">swipe to browse, tap a card for details</p>
+      <div class="project-carousel" id="projectCarousel"></div>
+      <div class="project-detail-panel" id="projectDetailPanel"></div>
+      <div class="coursework">
+        <p class="label">also built</p>
+        <ul id="courseworkList"></ul>
       </div>
+    </section>
 
-      <div class="flex-1 flex justify-center">
-        <!--
-        ╔══════════════════════════════════════════════════════╗
-        ║  📸 YOUR PHOTO GOES HERE                            ║
-        ║  Replace  src="anik.jpeg"  with your image path.    ║
-        ║  • If hosted locally: src="anik.jpeg"               ║
-        ║  • If online: src="https://your-image-url.com/..."  ║
-        ║  Keep the file in the SAME folder as index.html.    ║
-        ╚══════════════════════════════════════════════════════╝
-        -->
-        <img
-          src="anik.jpeg"
-          alt="Anik Biswas"
-          onerror="this.src='https://ui-avatars.com/api/?name=Anik+Biswas&size=256&background=1d4ed8&color=fff&bold=true&rounded=true'"
-          class="w-56 h-56 sm:w-64 sm:h-64 rounded-2xl object-cover shadow-2xl border-4 border-white"
-        />
-      </div>
+    <section id="changelog" class="block reveal">
+      <h2>## changelog</h2>
+      <div id="changelogList"></div>
+    </section>
 
-    </div>
-  </section>
+    <section id="connect" class="block reveal">
+      <h2>## connect</h2>
+      <ul class="plain-list" id="connectList"></ul>
+    </section>
 
+    <section id="contact" class="block reveal">
+      <h2>## contact</h2>
+      <form id="contactForm" class="contact-form">
+        <label for="c-name">name</label>
+        <input id="c-name" name="name" type="text" required />
+        <label for="c-email">email</label>
+        <input id="c-email" name="email" type="email" required />
+        <label for="c-message">message</label>
+        <textarea id="c-message" name="message" rows="5" required></textarea>
+        <button type="submit">send</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+      <p class="hero-links" id="contactAlt"></p>
+    </section>
 
-  <!-- ════════════════════════════════════════════
-       ABOUT
-  ════════════════════════════════════════════ -->
-  <section id="about" class="py-20 px-6 bg-white fade-in">
-    <div class="max-w-5xl mx-auto">
-      <p class="text-blue-700 text-xs font-bold tracking-widest uppercase text-center mb-2">Who I Am</p>
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">About Me</h2>
-      <div class="flex flex-col md:flex-row gap-12 items-center">
-        <div class="flex-1 text-gray-600 leading-relaxed text-sm">
-          <p class="mb-4">My name is <strong class="text-gray-900">Anik Biswas</strong>. I am a student of <strong class="text-gray-900">Computer Science & Engineering (CSE)</strong> at <strong class="text-blue-700">International Islamic University Chittagong (IIUC)</strong>. I am from <strong class="text-gray-900">Chittagong, Bangladesh</strong>.</p>
-          <p class="mb-4">I started learning programming with <strong>C and C++</strong>. After that I learned <strong>Java</strong>. Now I am learning web development with <strong>HTML and CSS</strong>. I also know some basic <strong>Python</strong>.</p>
-          <p class="mb-4">I also build <strong>vibe-coded web apps</strong> and enjoy solving problems on platforms like <strong>Codeforces</strong>, <strong>LeetCode</strong>, and <strong>CodeChef</strong>.</p>
-          <p>My goal is to become a good software engineer in the future. 🎯</p>
-        </div>
-        <div class="flex-1 grid grid-cols-2 gap-4">
-          <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-            <p class="text-3xl font-extrabold text-blue-700">6+</p>
-            <p class="text-xs text-gray-500 mt-1">Languages Known</p>
-          </div>
-          <div class="bg-gray-50 border border-gray-100 rounded-xl p-5 text-center">
-            <p class="text-3xl font-extrabold text-gray-800">4+</p>
-            <p class="text-xs text-gray-500 mt-1">Projects Done</p>
-          </div>
-          <div class="bg-gray-50 border border-gray-100 rounded-xl p-5 text-center">
-            <p class="text-3xl font-extrabold text-gray-800">IIUC</p>
-            <p class="text-xs text-gray-500 mt-1">University</p>
-          </div>
-          <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
-            <p class="text-3xl font-extrabold text-blue-700">CTG</p>
-            <p class="text-xs text-gray-500 mt-1">Chittagong, BD</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </main>
 
-
-  <!-- ════════════════════════════════════════════
-       SKILLS
-  ════════════════════════════════════════════ -->
-  <section id="skills" class="py-20 px-6 bg-gray-50 fade-in">
-    <div class="max-w-5xl mx-auto">
-      <p class="text-blue-700 text-xs font-bold tracking-widest uppercase text-center mb-2">What I Know</p>
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">My Skills</h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-5">
-
-        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
-          <div class="flex justify-between items-center mb-3">
-            <span class="font-bold text-gray-800">C</span>
-            <span class="text-blue-700 text-sm font-bold">75%</span>
-          </div>
-          <div class="w-full bg-gray-100 rounded-full h-2">
-            <div class="bg-blue-700 h-2 rounded-full" style="width:75%"></div>
-          </div>
-          <p class="text-xs text-gray-400 mt-2">Intermediate</p>
-        </div>
-
-        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
-          <div class="flex justify-between items-center mb-3">
-            <span class="font-bold text-gray-800">C++</span>
-            <span class="text-blue-700 text-sm font-bold">65%</span>
-          </div>
-          <div class="w-full bg-gray-100 rounded-full h-2">
-            <div class="bg-blue-700 h-2 rounded-full" style="width:65%"></div>
-          </div>
-          <p class="text-xs text-gray-400 mt-2">Intermediate</p>
-        </div>
-
-        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
-          <div class="flex justify-between items-center mb-3">
-            <span class="font-bold text-gray-800">Java</span>
-            <span class="text-blue-700 text-sm font-bold">55%</span>
-          </div>
-          <div class="w-full bg-gray-100 rounded-full h-2">
-            <div class="bg-blue-700 h-2 rounded-full" style="width:55%"></div>
-          </div>
-          <p class="text-xs text-gray-400 mt-2">Beginner</p>
-        </div>
-
-        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
-          <div class="flex justify-between items-center mb-3">
-            <span class="font-bold text-gray-800">HTML</span>
-            <span class="text-blue-700 text-sm font-bold">80%</span>
-          </div>
-          <div class="w-full bg-gray-100 rounded-full h-2">
-            <div class="bg-blue-700 h-2 rounded-full" style="width:80%"></div>
-          </div>
-          <p class="text-xs text-gray-400 mt-2">Good</p>
-        </div>
-
-        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
-          <div class="flex justify-between items-center mb-3">
-            <span class="font-bold text-gray-800">CSS</span>
-            <span class="text-blue-700 text-sm font-bold">70%</span>
-          </div>
-          <div class="w-full bg-gray-100 rounded-full h-2">
-            <div class="bg-blue-700 h-2 rounded-full" style="width:70%"></div>
-          </div>
-          <p class="text-xs text-gray-400 mt-2">Intermediate</p>
-        </div>
-
-        <div class="skill-card bg-white border border-gray-100 rounded-xl p-5 shadow-sm">
-          <div class="flex justify-between items-center mb-3">
-            <span class="font-bold text-gray-800">Python</span>
-            <span class="text-blue-700 text-sm font-bold">50%</span>
-          </div>
-          <div class="w-full bg-gray-100 rounded-full h-2">
-            <div class="bg-blue-700 h-2 rounded-full" style="width:50%"></div>
-          </div>
-          <p class="text-xs text-gray-400 mt-2">Beginner</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ════════════════════════════════════════════
-       PROJECTS
-  ════════════════════════════════════════════ -->
-  <section id="projects" class="py-20 px-6 bg-white fade-in">
-    <div class="max-w-5xl mx-auto">
-      <p class="text-blue-700 text-xs font-bold tracking-widest uppercase text-center mb-2">What I Built</p>
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">My Projects</h2>
-      <div class="grid sm:grid-cols-2 gap-6">
-
-        <!-- Notaloy -->
-        <div class="proj-card bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden">
-          <img
-            src="notaloy.jpg"
-            alt="Notaloy"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-            class="w-full h-44 object-cover"
-          />
-          <div class="w-full h-44 bg-gradient-to-br from-violet-500 to-blue-600 items-center justify-center hidden">
-            <div class="text-center text-white px-4">
-              <p class="text-4xl mb-2">📝</p>
-              <p class="font-bold text-xl tracking-wide">Notaloy</p>
-              <p class="text-xs text-white/80 mt-1">Vibe Project</p>
-            </div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-gray-900 font-bold text-lg mb-2">Notaloy</h3>
-            <p class="text-gray-500 text-sm mb-4">A vibe-coded note-taking web app. Clean UI for creating and managing notes quickly and easily.</p>
-            <div class="flex gap-2 flex-wrap mb-4">
-              <span class="bg-violet-50 text-violet-700 text-xs px-3 py-1 rounded-full font-medium border border-violet-100">Vibe Project</span>
-              <span class="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium border border-blue-100">Web App</span>
-            </div>
-            <a href="https://notaloy.lovable.app" target="_blank"
-               class="inline-block bg-blue-700 text-white text-xs font-bold px-5 py-2 rounded-lg hover:bg-blue-800 transition">
-              🌐 Live Demo →
-            </a>
-          </div>
-        </div>
-
-        <!-- Crafio -->
-        <div class="proj-card bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden">
-          <img
-            src="crafio.jpg"
-            alt="Crafio"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-            class="w-full h-44 object-cover"
-          />
-          <div class="w-full h-44 bg-gradient-to-br from-orange-400 to-pink-500 items-center justify-center hidden">
-            <div class="text-center text-white px-4">
-              <p class="text-4xl mb-2">🎨</p>
-              <p class="font-bold text-xl tracking-wide">Crafio</p>
-              <p class="text-xs text-white/80 mt-1">Vibe Project</p>
-            </div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-gray-900 font-bold text-lg mb-2">Crafio</h3>
-            <p class="text-gray-500 text-sm mb-4">A creative vibe-coded web project. Built with a focus on clean design and smooth user experience.</p>
-            <div class="flex gap-2 flex-wrap mb-4">
-              <span class="bg-orange-50 text-orange-600 text-xs px-3 py-1 rounded-full font-medium border border-orange-100">Vibe Project</span>
-              <span class="bg-pink-50 text-pink-600 text-xs px-3 py-1 rounded-full font-medium border border-pink-100">Web App</span>
-            </div>
-            <a href="https://crafio.lovable.app" target="_blank"
-               class="inline-block bg-blue-700 text-white text-xs font-bold px-5 py-2 rounded-lg hover:bg-blue-800 transition">
-              🌐 Live Demo →
-            </a>
-          </div>
-        </div>
-
-        <!-- E-Commerce -->
-        <div class="proj-card bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden">
-          <img
-            src="ec.jpg"
-            alt="E-Commerce"
-            onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=250&fit=crop'"
-            class="w-full h-44 object-cover"
-          />
-          <div class="p-6">
-            <h3 class="text-gray-900 font-bold text-lg mb-2">E-Commerce Website</h3>
-            <p class="text-gray-500 text-sm mb-4">A simple online shopping website with product listing, search bar, and add to cart. Built using HTML and CSS.</p>
-            <div class="flex gap-2 flex-wrap mb-4">
-              <span class="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium border border-blue-100">HTML</span>
-              <span class="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium border border-blue-100">CSS</span>
-              <span class="bg-blue-50 text-blue-700 text-xs px-3 py-1 rounded-full font-medium border border-blue-100">JavaScript</span>
-            </div>
-            <a href="https://celestial-cmd.github.io/ShopEasy/" target="_blank"
-               class="inline-block bg-blue-700 text-white text-xs font-bold px-5 py-2 rounded-lg hover:bg-blue-800 transition">
-              🌐 Live Demo →
-            </a>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ════════════════════════════════════════════
-       COMPETITIVE PROFILES
-  ════════════════════════════════════════════ -->
-  <section id="profiles" class="py-20 px-6 bg-gray-50 fade-in">
-    <div class="max-w-5xl mx-auto">
-      <p class="text-blue-700 text-xs font-bold tracking-widest uppercase text-center mb-2">Find Me Online</p>
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-4">My Profiles</h2>
-      <p class="text-center text-gray-500 text-sm mb-12">Competitive programming & open source</p>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-
-        <!-- GitHub -->
-        <a href="https://github.com/CeLesTiaL-cmd" target="_blank"
-           class="social-link bg-white border border-gray-200 rounded-2xl p-6 flex flex-col items-center gap-3 shadow-sm hover:border-gray-900 hover:shadow-md">
-          <div class="w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center">
-            <svg viewBox="0 0 24 24" class="w-6 h-6 fill-white" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-            </svg>
-          </div>
-          <div class="text-center">
-            <p class="font-bold text-gray-900 text-sm">GitHub</p>
-            <p class="text-xs text-gray-400 mt-0.5">CeLesTiaL-cmd</p>
-          </div>
-        </a>
-
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/anik-biswas-67717832a/" target="_blank"
-           class="social-link bg-white border border-gray-200 rounded-2xl p-6 flex flex-col items-center gap-3 shadow-sm hover:border-blue-700 hover:shadow-md">
-          <div class="w-12 h-12 bg-blue-700 rounded-xl flex items-center justify-center">
-            <svg viewBox="0 0 24 24" class="w-6 h-6 fill-white" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-          </div>
-          <div class="text-center">
-            <p class="font-bold text-gray-900 text-sm">LinkedIn</p>
-            <p class="text-xs text-gray-400 mt-0.5">anik-biswas</p>
-          </div>
-        </a>
-
-        <!-- Codeforces -->
-        <a href="https://codeforces.com/profile/Anik_Biswas_01" target="_blank"
-           class="social-link bg-white border border-gray-200 rounded-2xl p-6 flex flex-col items-center gap-3 shadow-sm hover:border-blue-600 hover:shadow-md">
-          <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
-            <span class="text-white font-black text-lg">CF</span>
-          </div>
-          <div class="text-center">
-            <p class="font-bold text-gray-900 text-sm">Codeforces</p>
-            <p class="text-xs text-gray-400 mt-0.5">Anik_Biswas_01</p>
-          </div>
-        </a>
-
-        <!-- LeetCode -->
-        <a href="https://leetcode.com/u/Anik_Biswas23/" target="_blank"
-           class="social-link bg-white border border-gray-200 rounded-2xl p-6 flex flex-col items-center gap-3 shadow-sm hover:border-orange-500 hover:shadow-md">
-          <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
-            <span class="text-white font-black text-sm">LC</span>
-          </div>
-          <div class="text-center">
-            <p class="font-bold text-gray-900 text-sm">LeetCode</p>
-            <p class="text-xs text-gray-400 mt-0.5">Anik_Biswas23</p>
-          </div>
-        </a>
-
-        <!-- CodeChef -->
-        <a href="https://www.codechef.com/users/z_marshal" target="_blank"
-           class="social-link bg-white border border-gray-200 rounded-2xl p-6 flex flex-col items-center gap-3 shadow-sm hover:border-amber-700 hover:shadow-md">
-          <div class="w-12 h-12 bg-amber-700 rounded-xl flex items-center justify-center">
-            <span class="text-white font-black text-sm">CC</span>
-          </div>
-          <div class="text-center">
-            <p class="font-bold text-gray-900 text-sm">CodeChef</p>
-            <p class="text-xs text-gray-400 mt-0.5">z_marshal</p>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ════════════════════════════════════════════
-       CONTACT
-  ════════════════════════════════════════════ -->
-  <section id="contact" class="py-20 px-6 bg-white fade-in">
-    <div class="max-w-xl mx-auto">
-      <p class="text-blue-700 text-xs font-bold tracking-widest uppercase text-center mb-2">Get In Touch</p>
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">Contact Me</h2>
-      <div class="bg-gray-50 rounded-2xl shadow-sm border border-gray-100 p-8">
-        <div class="mb-4">
-          <label class="block text-sm font-semibold text-gray-700 mb-1">Your Name</label>
-          <input id="c-name" type="text" placeholder="Enter your name"
-                 class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-blue-500 bg-white"/>
-        </div>
-        <div class="mb-4">
-          <label class="block text-sm font-semibold text-gray-700 mb-1">Your Email</label>
-          <input id="c-email" type="email" placeholder="Enter your email"
-                 class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-blue-500 bg-white"/>
-        </div>
-        <div class="mb-5">
-          <label class="block text-sm font-semibold text-gray-700 mb-1">Message</label>
-          <textarea id="c-msg" rows="4" placeholder="Write your message..."
-                    class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-blue-500 bg-white resize-none"></textarea>
-        </div>
-        <button onclick="sendMessage()"
-                class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg hover:bg-blue-800 transition text-sm">
-          Send Message ✉️
-        </button>
-        <p id="success-msg" class="text-green-600 text-center font-semibold mt-3 hidden">✅ Message sent successfully!</p>
-        <p id="error-msg"   class="text-red-500   text-center font-semibold mt-3 hidden">⚠️ Please fill all fields first.</p>
-      </div>
-
-      <div class="flex justify-center gap-6 mt-8 text-sm text-gray-500 text-center flex-wrap">
-        <div><p class="text-blue-700 text-lg mb-1">📧</p><p class="text-xs">anikbiswas@gmail.com</p></div>
-        <div><p class="text-blue-700 text-lg mb-1">📍</p><p class="text-xs">Chittagong, BD</p></div>
-        <div><p class="text-blue-700 text-lg mb-1">🎓</p><p class="text-xs">IIUC — CSE</p></div>
-        <a href="https://github.com/CeLesTiaL-cmd" target="_blank">
-          <p class="text-blue-700 text-lg mb-1">💻</p><p class="text-xs hover:text-blue-700 transition">GitHub</p>
-        </a>
-        <a href="https://www.linkedin.com/in/anik-biswas-67717832a/" target="_blank">
-          <p class="text-blue-700 text-lg mb-1">🔗</p><p class="text-xs hover:text-blue-700 transition">LinkedIn</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ════════════════════════════════════════════
-       FOOTER
-  ════════════════════════════════════════════ -->
-  <footer class="bg-gray-900 text-gray-400 text-center py-8 text-sm px-4">
-    <p class="mb-2">Made by <span class="text-white font-semibold">Anik Biswas</span> — CSE Student, IIUC Chittagong</p>
-    <div class="flex justify-center gap-5 text-xs mt-3 flex-wrap">
-      <a href="https://github.com/CeLesTiaL-cmd" target="_blank"    class="hover:text-white transition">GitHub</a>
-      <a href="https://www.linkedin.com/in/anik-biswas-67717832a/" target="_blank" class="hover:text-white transition">LinkedIn</a>
-      <a href="https://codeforces.com/profile/Anik_Biswas_01" target="_blank" class="hover:text-white transition">Codeforces</a>
-      <a href="https://leetcode.com/u/Anik_Biswas23/"  target="_blank"          class="hover:text-white transition">LeetCode</a>
-      <a href="https://www.codechef.com/users/z_marshal" target="_blank"        class="hover:text-white transition">CodeChef</a>
-    </div>
-    <p class="text-xs mt-4 text-gray-600">&copy; 2025. All rights reserved.</p>
+  <footer class="site-footer">
+    <span id="footerLocation"></span>
+    <span id="footerCopy"></span>
   </footer>
 
+</div>
+<script>
+/* ============================================================
+   All the content on this site lives in DATA below.
+   Edit it to update your portfolio — nothing else needs to change.
+   ============================================================ */
 
-  <!-- ════════════════════════════════════════════
-       SCRIPTS
-  ════════════════════════════════════════════ -->
-  <script>
-    // ── Typed animation ──
-    var phrases = ["CSE Student at IIUC 🎓", "Web Developer (Learning) 💻", "Vibe Coder ✨", "From Chittagong, BD 🇧🇩"];
-    var pi = 0, ci = 0, deleting = false;
-    function type() {
-      var el = document.getElementById("typed-text");
-      var word = phrases[pi];
-      el.textContent = deleting ? word.substring(0, ci--) : word.substring(0, ci++);
-      if (!deleting && ci === word.length + 1) { deleting = true; setTimeout(type, 1400); return; }
-      if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
-      setTimeout(type, deleting ? 55 : 95);
+const DATA = {
+  name: "Anik Biswas",
+  role: "CSE Student & Full-Stack Developer — Chattogram, Bangladesh",
+  email: "banik9064@gmail.com",
+  location: "Chattogram, Bangladesh",
+  heroDesc: "Building full-stack apps with the MERN stack, and working through competitive programming problems on the side.",
+
+  about: {
+    bio: "I'm a Computer Science & Engineering student at International Islamic University Chittagong (IIUC). Started with C and C++, picked up Java, and now build full-stack apps with the MERN stack.",
+    facts: [
+      { label: "location", value: "Chattogram, Bangladesh" },
+      { label: "education", value: "B.Sc. CSE, IIUC — 6th semester" },
+      { label: "building", value: '<a href="https://stacks-seven-henna.vercel.app" target="_blank" rel="noopener noreferrer">Stacks</a> — a repository platform for research papers &amp; code' },
+      { label: "competitive", value: '<a href="https://codeforces.com/profile/Anik_Biswas_01" target="_blank" rel="noopener noreferrer">Codeforces</a> &middot; <a href="https://leetcode.com/u/Anik_Biswas23/" target="_blank" rel="noopener noreferrer">LeetCode</a> &middot; <a href="https://www.codechef.com/users/z_marshal" target="_blank" rel="noopener noreferrer">CodeChef</a>' }
+    ]
+  },
+
+  skills: {
+    "languages": ["C", "C++", "Java", "Python", "JavaScript"],
+    "web": ["React", "Node.js", "Express.js", "MongoDB", "HTML5", "CSS3"],
+    "databases & tools": ["MySQL", "Firebase Auth", "Git", "GitHub"],
+    "focus": ["Competitive Programming", "AI-assisted Development", "Prompt Engineering"]
+  },
+
+  projects: [
+    {
+      name: "Stacks",
+      current: true,
+      description: "A repository platform for research papers, publications, and code projects.",
+      detail: "Stacks is a MERN-based repository platform for gathering thesis papers, research publications, and code projects across academic and industry sectors — a single place to publish and discover work, the way developers publish on GitHub.",
+      highlights: [
+        "Firebase Authentication for secure sign-in",
+        "MongoDB-backed storage for papers and projects",
+        "Built and deployed independently, live on Vercel"
+      ],
+      tags: ["React", "Node.js", "Express", "MongoDB", "Firebase Auth"],
+      live: "https://stacks-seven-henna.vercel.app",
+      source: null
+    },
+    {
+      name: "Notaloy",
+      description: "A note-taking web app with a clean, fast interface.",
+      detail: "Notaloy is a note-taking web app focused on speed — create, edit, and organize notes with as little friction as possible.",
+      highlights: ["Clean, distraction-free interface", "Rapid-prototyped and shipped end to end"],
+      tags: ["Web App"],
+      live: "https://notaloy.lovable.app",
+      source: null
+    },
+    {
+      name: "Crafio",
+      description: "A creative web project exploring layout and interaction.",
+      detail: "Crafio is a creative web project built to explore layout and interaction design outside a strict use case.",
+      highlights: ["Focus on visual polish over feature count", "Rapid-prototyped and shipped end to end"],
+      tags: ["Web App"],
+      live: "https://crafio.lovable.app",
+      source: null
+    },
+    {
+      name: "ShopEasy",
+      description: "An online shopping site built from scratch.",
+      detail: "ShopEasy is a functional online shopping site — product listings, a search bar, and a working cart — built without any framework.",
+      highlights: ["Vanilla HTML, CSS, and JavaScript — no framework", "Product search and cart logic built by hand"],
+      tags: ["HTML", "CSS", "JavaScript"],
+      live: "https://celestial-cmd.github.io/ShopEasy/",
+      source: "https://github.com/CeLesTiaL-cmd"
     }
-    type();
+  ],
 
-    // ── Scroll fade-in ──
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add("show"); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll(".fade-in").forEach(function(el) { obs.observe(el); });
+  coursework: [
+    { name: "AI-Based IoT Disaster Management System (ESP32)", tags: "ESP32, IoT, AI", note: "Group lab project for CSE-3524 (Microprocessors, Microcontrollers and Embedded Systems Lab), IIUC — submitted Aug 2026 with a team of four." },
+    { name: "Radar System", tags: "Arduino Uno, Servo Motor, Ultrasonic Sensor", note: "An Arduino-based radar-style setup — a servo sweeps an ultrasonic sensor to map distances across an arc." },
+    { name: "Hostel Booking & Management System", tags: "Java, MySQL", note: "Room allocation, tenant records, and real-time querying for a student hostel." },
+    { name: "Online Food Ordering System", tags: "Java, C++", note: "A multi-tier ordering platform built around OOP principles and menu management." },
+    { name: "Turf Management System", tags: "C", note: "A console-based slot booking and scheduling system using optimized data structures." }
+  ],
 
-    // ── Active nav ──
-    window.addEventListener("scroll", function() {
-      var current = "";
-      document.querySelectorAll("section").forEach(function(s) {
-        if (window.scrollY >= s.offsetTop - 90) current = s.id;
-      });
-      document.querySelectorAll(".nav-link").forEach(function(a) {
-        a.style.color = a.getAttribute("href") === "#" + current ? "#1d4ed8" : "";
-      });
+  changelog: [
+    {
+      date: "2026-09",
+      title: "IIUC CSE Fest 2026",
+      items: [
+        "Certificate of Appreciation for event participation",
+        'Certificate of Participation — AI Seminar: "Trust, Transparency, Optimization: Rethinking AI Systems for Real-World Adoption"'
+      ]
+    },
+    {
+      date: "2025-10",
+      title: "IIUC Inter-University Bootcamp (Autumn '25)",
+      items: ["5th place, Individual Short Contest – 03", "3 problems solved, placed in the Top 10"]
+    },
+    {
+      date: "2025-09",
+      title: "International Congress on Artificial Intelligence (ICAI 2025)",
+      items: ["Attended the 2-day congress, organized by the IEEE Systems Council BUBT Student Branch Chapter"]
+    },
+    {
+      date: "2025",
+      title: "ISSB — Bangladesh Navy Officer Recruitment (BN-23)",
+      items: ["Completed all 5 days of physical and mental assessment", "Earned a Red Card"]
+    }
+  ],
+
+  social: [
+    { platform: "GitHub", handle: "CeLesTiaL-cmd", url: "https://github.com/CeLesTiaL-cmd" },
+    { platform: "LinkedIn", handle: "anik-biswas", url: "https://www.linkedin.com/in/anik-biswas-67717832a/" },
+    { platform: "Codeforces", handle: "Anik_Biswas_01", url: "https://codeforces.com/profile/Anik_Biswas_01" },
+    { platform: "LeetCode", handle: "Anik_Biswas23", url: "https://leetcode.com/u/Anik_Biswas23/" },
+    { platform: "CodeChef", handle: "z_marshal", url: "https://www.codechef.com/users/z_marshal" }
+  ]
+};
+
+/* ------------------------------------------------------------
+   Replace this once you've created a form at https://formspree.io
+   (free tier is enough). Paste the endpoint it gives you below —
+   it looks like "https://formspree.io/f/xxxxxxxx".
+   Until then, the form fails gracefully and points to your email.
+   ------------------------------------------------------------ */
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+/* ============================================================
+   Rendering
+   ============================================================ */
+
+function renderHero() {
+  document.getElementById("heroName").textContent = DATA.name;
+  document.getElementById("heroRole").textContent = DATA.role;
+  document.getElementById("heroDesc").textContent = DATA.heroDesc;
+}
+
+function renderAbout() {
+  document.getElementById("aboutBio").textContent = DATA.about.bio;
+  document.getElementById("factList").innerHTML = DATA.about.facts
+    .map((f) => `<dt>${f.label}</dt><dd>${f.value}</dd>`)
+    .join("");
+}
+
+function renderSkills() {
+  document.getElementById("skillRows").innerHTML = Object.entries(DATA.skills)
+    .map(
+      ([label, items]) => `
+      <div class="skill-row">
+        <span class="label">${label}</span>
+        <span class="items">${items.map((i) => `<code>${i}</code>`).join(" ")}</span>
+      </div>`
+    )
+    .join("");
+}
+
+/* ------------------------------------------------------------
+   Projects: swipeable carousel + shared detail panel
+   ------------------------------------------------------------ */
+
+function renderProjects() {
+  const carousel = document.getElementById("projectCarousel");
+  const panel = document.getElementById("projectDetailPanel");
+
+  carousel.innerHTML = DATA.projects
+    .map(
+      (p, i) => `
+      <div class="project-card" data-index="${i}">
+        <span class="pname">${p.name}${p.current ? '<span class="flag">current</span>' : ""}</span>
+        <p>${p.description}</p>
+        <div class="tag-row">${p.tags.slice(0, 3).map((t) => `<code>${t}</code>`).join("")}</div>
+      </div>`
+    )
+    .join("");
+
+  const cards = Array.from(carousel.querySelectorAll(".project-card"));
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      cards.forEach((c) => c.classList.remove("active"));
+      card.classList.add("active");
+      showProjectDetail(DATA.projects[Number(card.dataset.index)]);
     });
+  });
 
-    // ── Hamburger menu ──
-    var burger = document.getElementById("burger");
-    var menu   = document.getElementById("mobile-menu");
-    var b1 = document.getElementById("b1");
-    var b2 = document.getElementById("b2");
-    var b3 = document.getElementById("b3");
-    var open = false;
-    burger.addEventListener("click", function() {
-      open = !open;
-      menu.classList.toggle("open", open);
-      b1.style.transform = open ? "translateY(8px) rotate(45deg)"  : "";
-      b2.style.opacity   = open ? "0" : "1";
-      b3.style.transform = open ? "translateY(-8px) rotate(-45deg)": "";
-    });
-    function closeMobile() {
-      open = false;
-      menu.classList.remove("open");
-      b1.style.transform = ""; b2.style.opacity = "1"; b3.style.transform = "";
-    }
+  // Show the current/first project by default
+  if (cards.length) {
+    cards[0].classList.add("active");
+    showProjectDetail(DATA.projects[0]);
+  }
 
-    // ── Contact form ──
-    function sendMessage() {
-      var name  = document.getElementById("c-name").value.trim();
-      var email = document.getElementById("c-email").value.trim();
-      var msg   = document.getElementById("c-msg").value.trim();
-      var ok  = document.getElementById("success-msg");
-      var err = document.getElementById("error-msg");
-      if (!name || !email || !msg) {
-        err.classList.remove("hidden"); ok.classList.add("hidden");
-        setTimeout(function(){ err.classList.add("hidden"); }, 3000);
-        return;
-      }
-      ok.classList.remove("hidden"); err.classList.add("hidden");
-      document.getElementById("c-name").value  = "";
-      document.getElementById("c-email").value = "";
-      document.getElementById("c-msg").value   = "";
-      setTimeout(function(){ ok.classList.add("hidden"); }, 3000);
+  // Mouse drag-to-scroll, so desktop users get the same swipe feel as touch
+  let isDown = false, startX = 0, startScroll = 0;
+  carousel.addEventListener("mousedown", (e) => {
+    isDown = true; startX = e.pageX; startScroll = carousel.scrollLeft;
+  });
+  window.addEventListener("mouseup", () => { isDown = false; });
+  carousel.addEventListener("mouseleave", () => { isDown = false; });
+  carousel.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    carousel.scrollLeft = startScroll - (e.pageX - startX);
+  });
+
+  document.getElementById("courseworkList").innerHTML = DATA.coursework
+    .map((c) => `<li><strong>${c.name}</strong> (${c.tags}) — ${c.note}</li>`)
+    .join("");
+}
+
+function showProjectDetail(project) {
+  const panel = document.getElementById("projectDetailPanel");
+  panel.classList.remove("show");
+  panel.innerHTML = `
+    <h3>${project.name}${project.current ? '<span class="flag">current</span>' : ""}</h3>
+    <p class="detail-text">${project.detail}</p>
+    <ul>${project.highlights.map((h) => `<li>${h}</li>`).join("")}</ul>
+    <div class="tag-row">${project.tags.map((t) => `<code>${t}</code>`).join("")}</div>
+    <div class="links">
+      ${project.live ? `<a class="plink" href="${project.live}" target="_blank" rel="noopener noreferrer">live demo →</a>` : ""}
+      ${project.source ? `<a class="plink" href="${project.source}" target="_blank" rel="noopener noreferrer">source →</a>` : ""}
+    </div>
+  `;
+  // restart the transition so switching projects always animates in
+  requestAnimationFrame(() => panel.classList.add("show"));
+}
+
+function renderChangelog() {
+  document.getElementById("changelogList").innerHTML = DATA.changelog
+    .map(
+      (e) => `
+      <div class="changelog-entry">
+        <div class="changelog-date">${e.date} — ${e.title}</div>
+        <ul>${e.items.map((i) => `<li>${i}</li>`).join("")}</ul>
+      </div>`
+    )
+    .join("");
+}
+
+function renderSocial() {
+  document.getElementById("connectList").innerHTML = DATA.social
+    .map(
+      (s) => `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.platform}</a> <span class="handle">— ${s.handle}</span></li>`
+    )
+    .join("");
+}
+
+function renderFooter() {
+  document.getElementById("footerLocation").textContent = DATA.location;
+  document.getElementById("footerCopy").textContent = `© ${new Date().getFullYear()} ${DATA.name}`;
+  document.getElementById("contactAlt").innerHTML = `prefer email? write to <a href="mailto:${DATA.email}">${DATA.email}</a>`;
+}
+
+/* ============================================================
+   Nav: simple scroll-spy, no visual chrome beyond a color change
+   ============================================================ */
+
+function initNav() {
+  const links = Array.from(document.querySelectorAll(".site-nav a"));
+  const sections = links.map((a) => document.getElementById(a.dataset.target)).filter(Boolean);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          links.forEach((a) => a.classList.toggle("active", a.dataset.target === entry.target.id));
+        }
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
+  sections.forEach((s) => observer.observe(s));
+}
+
+/* ============================================================
+   Scroll reveal — sections fade/slide in once, then stay put
+   ============================================================ */
+
+function initReveal() {
+  const els = document.querySelectorAll(".reveal");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+  els.forEach((el) => observer.observe(el));
+}
+
+/* ============================================================
+   Contact form
+   ============================================================ */
+
+function initContactForm() {
+  const form = document.getElementById("contactForm");
+  const status = document.getElementById("formStatus");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    status.textContent = "sending…";
+    status.className = "form-status";
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      });
+      if (!res.ok) throw new Error("Form endpoint not ready");
+      status.textContent = "message sent — thanks, I'll reply soon.";
+      status.className = "form-status ok";
+      form.reset();
+    } catch (err) {
+      status.textContent = `couldn't send that yet — please email me directly at ${DATA.email}.`;
+      status.className = "form-status err";
     }
-  </script>
+  });
+}
+
+/* ============================================================
+   Init
+   ============================================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderHero();
+  renderAbout();
+  renderSkills();
+  renderProjects();
+  renderChangelog();
+  renderSocial();
+  renderFooter();
+  initNav();
+  initReveal();
+  initContactForm();
+});
+
+</script>
 </body>
 </html>

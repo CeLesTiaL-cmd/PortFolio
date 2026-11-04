@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Anik Biswas</title>
-<meta name="description" content="Anik Biswas, full-stack developer and competitive programmer from Chattogram.">
+<meta name="theme-color" content="#fbfbfa"><meta property="og:title" content="Anik Biswas"><meta property="og:description" content="Full-stack developer and competitive programmer from Chattogram."><meta name="description" content="Anik Biswas, full-stack developer and competitive programmer from Chattogram.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -32,9 +32,6 @@ nav .wrap{display:flex;align-items:center;gap:12px;height:68px;position:relative
 .ic{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;transition:transform .25s,border-color .2s}
 .ic:hover{transform:translateY(-2px);border-color:var(--acc)}
 .dots{display:none}
-.menu{position:absolute;right:20px;top:calc(100% - 6px);min-width:200px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:8px;display:flex;flex-direction:column;opacity:0;transform:translateY(-6px) scale(.98);transform-origin:top right;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 18px 40px -18px rgba(0,0,0,.45)}
-.menu.open{opacity:1;transform:none;pointer-events:auto}
-.menu a{padding:11px 14px;border-radius:12px;font-size:15px}.menu a:hover{background:var(--accsoft)}
 @media(max-width:860px){.links{display:none}.dots{display:grid}}
 @media(min-width:861px){.menu{display:none}}
 main{transition:opacity .2s}.fade main{opacity:0}
@@ -146,24 +143,47 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:13px;display:flex;justif
 .doc p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.75}.doc ul{margin:0;padding-left:20px;color:var(--muted);font-size:15px;line-height:1.8}
 .btn.gr{background:#16a34a;color:#fff}.btn.gr:hover{box-shadow:0 12px 28px -12px rgba(22,163,74,.7)}.btn.off{opacity:.55;pointer-events:none}
 .acts{margin:6px 0 30px}
+#pgb{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc);z-index:50}
+main{overflow-x:clip}.flow{overflow-x:clip}.stage{overscroll-behavior-x:contain}
+.menu{position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);padding:4px 20px 14px;display:flex;flex-direction:column;opacity:0;transform:translateY(-10px);pointer-events:none;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s;box-shadow:0 26px 40px -28px rgba(0,0,0,.5)}
+.menu.open{opacity:1;transform:none;pointer-events:auto;visibility:visible}
+.menu a{padding:15px 2px;border-bottom:1px solid var(--line);font-size:17px;font-weight:500;border-radius:0}
+.menu a:last-child{border-bottom:0}
+.menu a:hover{color:var(--acc)}
+.links a.on,.menu a.on{color:var(--acc)}.menu a.on{background:none}
+.tile{box-shadow:0 18px 32px -10px rgba(0,0,0,.6),0 0 0 1px color-mix(in srgb,var(--text) 10%,transparent);transition:transform .45s cubic-bezier(.2,.8,.2,1);cursor:pointer;animation:bob 4.5s ease-in-out infinite}
+.tile.t2{animation-delay:-2.2s}
+.tile:hover,.tile:active{transform:rotate(-8deg) scale(1.14)}
+.tile svg{transition:transform .5s}.tile:hover svg,.tile:active svg{transform:rotate(12deg) scale(1.12)}
+:root[data-theme=dark] .tile{box-shadow:0 18px 32px -10px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.14)}
+@keyframes bob{50%{translate:0 -6px;rotate:-5deg}}
+.ph{box-shadow:0 18px 34px -10px rgba(0,0,0,.5),0 10px 28px -10px rgba(244,162,97,.7)}
+.ph:not(.z){animation:bob2 5.5s ease-in-out infinite}
+@keyframes bob2{50%{translate:0 -4px}}
+@media(hover:hover){.ph:hover{animation:none}}
+.sb.open{background:var(--accsoft);color:var(--acc)}
+.sb.open span{max-width:110px;opacity:1;margin-left:9px}
+.lg.new::before{content:"";position:absolute;top:-4px;right:-4px;width:10px;height:10px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px var(--card)}
+.pn{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:30px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
+<div id="pgb"></div>
 <nav><div class="wrap">
   <a href="#home" class="logo">Anik<i>.</i></a>
   <div class="links" id="links"></div>
   <div class="seg" role="group" aria-label="Language"><button data-l="bn">বাংলা</button><button data-l="en" class="on">EN</button></div>
   <button class="ic" id="th" aria-label="Toggle theme"></button>
   <button class="ic dots" id="mb" aria-label="Menu" aria-expanded="false"><span class="hb"><i></i><i></i><i></i></span></button>
-  <div class="menu" id="menu"></div>
-</div></nav>
+  </div>
+<div class="menu" id="menu"></div></nav>
 
 <main class="wrap">
 <section class="view on" id="v-home">
   <p class="kick" data-i="k1"></p>
-  <h1><span class="g1" data-i="h1"></span> <span class="ph" id="ph"><img id="av" alt="Anik Biswas" src="anik.jpeg"></span> <span class="acc">Anik</span><br>
-  <span class="g1" data-i="h2"></span> <span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 10-2 2 2 2M14 10l2 2-2 2"/></svg></span> <span data-i="h3"></span> <span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span> <span data-i="h4"></span></h1>
+  <h1><span class="g1" data-i="h1"></span> <span class="ph" id="ph" tabindex="0" role="button" aria-label="Zoom photo"><img id="av" alt="Anik Biswas" src="anik.jpeg"></span> <span class="acc">Anik</span><br>
+  <span class="g1" data-i="h2"></span> <span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 10-2 2 2 2M14 10l2 2-2 2"/></svg></span> <span data-i="h3"></span> <span class="tile t2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span> <span data-i="h4"></span></h1>
   <div class="work">
     <span><span data-i="r1"></span><span class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 17 6-6-6-6M12 19h8"/></svg></span></span>
     <span><span data-i="r2"></span><span class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M9 13v1M15 13v1"/></svg></span><span class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><span class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></span></span>
@@ -174,7 +194,7 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:13px;display:flex;justif
 
 <section class="view" id="v-about"><h2 data-i="n_about"></h2><p class="sub" data-i="as"></p>
   <div class="card"><h3 data-i="ah"></h3><p data-i="ap"></p>
-    <dl class="fl"><dt data-i="l1"></dt><dd data-i="v1"></dd><dt data-i="l2"></dt><dd data-i="v2"></dd><dt data-i="l3"></dt><dd data-i="v3"></dd></dl></div>
+    <dl class="fl"><dt data-i="l4"></dt><dd data-i="v4"></dd><dt data-i="l1"></dt><dd data-i="v1"></dd><dt data-i="l2"></dt><dd data-i="v2"></dd><dt data-i="l3"></dt><dd data-i="v3"></dd></dl></div>
   <div class="card"><span class="tag" data-i="cur"></span><h3 data-i="ch"></h3><p data-i="cp"></p><div class="chips"><span>Python</span><span>AI Agent</span></div></div>
 </section>
 
@@ -207,18 +227,18 @@ footer{padding:30px 0 60px;color:var(--muted);font-size:13px;display:flex;justif
 
 <script>
 const T={en:{n_home:"Home",n_about:"About",n_skills:"Skills",n_projects:"Projects",n_journey:"Journey",n_contact:"Contact",
-k1:"CSE student at IIUC",h1:"Hey, I’m",h2:"And I build",h3:"full-stack apps and",h4:"solve problems",r1:"Studying",r2:"Also into",p1:"I’m a CSE student, full-stack developer and competitive programmer from Chattogram, Bangladesh. This portfolio has been live for <em>exactly <b class='num' id='secs'></b> seconds</em>!",p2:"I use React, Node.js, Express and MongoDB most of the time. Right now my focus is on AI agents and building things end to end.",p3:"I’ve built web apps like Stacks, a platform for research papers and code, and I’m now developing an AI agent for a research thesis project.",
+k1:"CSE student at IIUC",h1:"Hey, I’m",h2:"And I build",h3:"full-stack apps and",h4:"solve problems",r1:"Studying",r2:"Also into",p1:"I’m a 24-year-old CSE student, full-stack developer and competitive programmer from Chattogram, Bangladesh. This portfolio has been live for <em>exactly <b class='num' id='secs'></b> seconds</em>!",p2:"I use React, Node.js, Express and MongoDB most of the time. Right now my focus is on AI agents and building things end to end.",p3:"I’ve built web apps like Stacks, a platform for research papers and code, and I’m now developing an AI agent for a research thesis project.",
 as:"A little about me.",ah:"A CSE student who likes building things.",ap:"I study Computer Science & Engineering at IIUC. I started with C and C++, moved on to Java, and now build full-stack apps with the MERN stack.",
-l1:"Location",v1:"Chattogram, Bangladesh",l2:"Education",v2:"B.Sc. CSE, IIUC, 6th semester",l3:"Competitive",v3:"Codeforces, LeetCode and CodeChef",
+l4:"Age",v4:"24",l1:"Location",v1:"Chattogram, Bangladesh",l2:"Education",v2:"B.Sc. CSE, IIUC, 6th semester",l3:"Competitive",v3:"Codeforces, LeetCode and CodeChef",
 cur:"Building now",ch:"AI agent (ongoing)",cp:"An AI agent for a research thesis project. I’m the developer, working on the data checks, processing pipeline and experiment tracking.",
 ss:"The languages, web stack and tools I work with.",ws:"Swipe or use the arrows to browse. Use the arrow on a card to open the project.",also:"Also built",demo:"Live link",repo:"GitHub repo",open_p:"Open project",live_s:"Live",back:"Back to projects",ov:"Overview",hi:"Highlights",tech:"Tech stack",soon:"Live link coming soon",ong:"Ongoing",
 js:"Contests, events and milestones.",live:"This portfolio has been live for",u1:"days",u2:"hours",u3:"min",u4:"sec",since:"Started building {d} days ago.",dates:"First created Apr 24, 2026. Deployed May 3, 2026.",
 cs:"Send me a message and I’ll get back to you.",pn:"Your name",pe:"Your email",pm:"Your message",send:"Send message",find:"Find me online",
 sending:"Sending…",ok:"Sent. Thanks, I’ll reply soon.",err:"Couldn’t send right now. Please try again a little later."},
 bn:{n_home:"হোম",n_about:"পরিচিতি",n_skills:"দক্ষতা",n_projects:"প্রজেক্ট",n_journey:"পথচলা",n_contact:"যোগাযোগ",
-k1:"IIUC-তে CSE শিক্ষার্থী",h1:"হ্যালো, আমি",h2:"আমি বানাই",h3:"ফুল-স্ট্যাক অ্যাপ এবং",h4:"সমস্যা সমাধান করি",r1:"পড়াশোনা",r2:"এছাড়াও",p1:"আমি চট্টগ্রাম, বাংলাদেশের একজন CSE শিক্ষার্থী, ফুল-স্ট্যাক ডেভেলপার ও প্রতিযোগিতামূলক প্রোগ্রামার। এই পোর্টফোলিও লাইভ আছে <em>ঠিক <b class='num' id='secs'></b> সেকেন্ড</em> ধরে!",p2:"আমি বেশিরভাগ সময় React, Node.js, Express আর MongoDB ব্যবহার করি। এখন আমার ফোকাস AI এজেন্ট আর শুরু থেকে শেষ পর্যন্ত জিনিস বানানোয়।",p3:"আমি Stacks-এর মতো ওয়েব অ্যাপ বানিয়েছি, যা গবেষণাপত্র ও কোডের প্ল্যাটফর্ম, আর এখন একটি গবেষণা থিসিস প্রজেক্টের জন্য AI এজেন্ট ডেভেলপ করছি।",
+k1:"IIUC-তে CSE শিক্ষার্থী",h1:"হ্যালো, আমি",h2:"আমি বানাই",h3:"ফুল-স্ট্যাক অ্যাপ এবং",h4:"সমস্যা সমাধান করি",r1:"পড়াশোনা",r2:"এছাড়াও",p1:"আমি চট্টগ্রাম, বাংলাদেশের ২৪ বছর বয়সী একজন CSE শিক্ষার্থী, ফুল-স্ট্যাক ডেভেলপার ও প্রতিযোগিতামূলক প্রোগ্রামার। এই পোর্টফোলিও লাইভ আছে <em>ঠিক <b class='num' id='secs'></b> সেকেন্ড</em> ধরে!",p2:"আমি বেশিরভাগ সময় React, Node.js, Express আর MongoDB ব্যবহার করি। এখন আমার ফোকাস AI এজেন্ট আর শুরু থেকে শেষ পর্যন্ত জিনিস বানানোয়।",p3:"আমি Stacks-এর মতো ওয়েব অ্যাপ বানিয়েছি, যা গবেষণাপত্র ও কোডের প্ল্যাটফর্ম, আর এখন একটি গবেষণা থিসিস প্রজেক্টের জন্য AI এজেন্ট ডেভেলপ করছি।",
 as:"আমার সম্পর্কে কিছু কথা।",ah:"বানাতে ভালোবাসি এমন একজন CSE শিক্ষার্থী।",ap:"আমি IIUC-তে কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিং পড়ছি। C আর C++ দিয়ে শুরু, তারপর Java, আর এখন MERN স্ট্যাক দিয়ে ফুল-স্ট্যাক অ্যাপ বানাই।",
-l1:"স্থান",v1:"চট্টগ্রাম, বাংলাদেশ",l2:"শিক্ষা",v2:"বি.এসসি CSE, IIUC, ৬ষ্ঠ সেমিস্টার",l3:"প্রতিযোগিতা",v3:"Codeforces, LeetCode ও CodeChef",
+l4:"বয়স",v4:"২৪ বছর",l1:"স্থান",v1:"চট্টগ্রাম, বাংলাদেশ",l2:"শিক্ষা",v2:"বি.এসসি CSE, IIUC, ৬ষ্ঠ সেমিস্টার",l3:"প্রতিযোগিতা",v3:"Codeforces, LeetCode ও CodeChef",
 cur:"এখন যা বানাচ্ছি",ch:"AI এজেন্ট (চলমান)",cp:"একটি গবেষণা থিসিস প্রজেক্টের জন্য AI এজেন্ট। আমি এর ডেভেলপার, ডেটা যাচাই, প্রসেসিং পাইপলাইন আর এক্সপেরিমেন্ট ট্র্যাকিং নিয়ে কাজ করছি।",
 ss:"যে ভাষা, ওয়েব স্ট্যাক ও টুল নিয়ে কাজ করি।",ws:"সোয়াইপ করুন বা তীর চাপুন। প্রজেক্ট খুলতে কার্ডের তীর বাটনে চাপুন।",also:"আরও যা বানিয়েছি",demo:"লাইভ লিংক",repo:"GitHub রিপো",open_p:"প্রজেক্ট খুলুন",live_s:"লাইভ",back:"প্রজেক্টে ফিরে যান",ov:"ওভারভিউ",hi:"মূল বৈশিষ্ট্য",tech:"ব্যবহৃত প্রযুক্তি",soon:"লাইভ লিংক শিগগিরই আসছে",ong:"চলমান",
 js:"প্রতিযোগিতা, ইভেন্ট ও মাইলফলক।",live:"এই পোর্টফোলিও লাইভ আছে",u1:"দিন",u2:"ঘণ্টা",u3:"মিনিট",u4:"সেকেন্ড",since:"তৈরি শুরু হয়েছে {d} দিন আগে।",dates:"প্রথম তৈরি ২৪ এপ্রিল ২০২৬। ডেপ্লয় ৩ মে ২০২৬।",
@@ -237,7 +257,7 @@ const TL=[{y:"2026-09",b:{en:["Certificate of Appreciation for event participati
 const K=(n,k,u)=>({n,k,u});
 const SKG=[{l:{en:"Languages",bn:"ভাষা"},i:[K("C","c","https://en.wikipedia.org/wiki/C_(programming_language)"),K("C++","cplusplus","https://isocpp.org"),K("Java","openjdk","https://www.java.com"),K("Python","python","https://www.python.org"),K("JavaScript","javascript","https://developer.mozilla.org/docs/Web/JavaScript")]},
 {l:{en:"Web",bn:"ওয়েব"},i:[K("React","react","https://react.dev"),K("Node.js","nodedotjs","https://nodejs.org"),K("Express.js","express","https://expressjs.com"),K("Next.js","nextdotjs","https://nextjs.org"),K("HTML5","html5","https://developer.mozilla.org/docs/Web/HTML"),K("CSS3","css3","https://developer.mozilla.org/docs/Web/CSS")]},
-{l:{en:"Databases & tools",bn:"ডেটাবেস ও টুলস"},i:[K("MongoDB","mongodb","https://www.mongodb.com"),K("MySQL","mysql","https://www.mysql.com"),K("Supabase","supabase","https://supabase.com"),K("Firebase","firebase","https://firebase.google.com"),K("Git","git","https://git-scm.com"),K("GitHub","github","https://github.com")]},
+{l:{en:"Databases & tools",bn:"ডেটাবেস ও টুলস"},i:[K("MongoDB","mongodb","https://www.mongodb.com"),K("MySQL","mysql","https://www.mysql.com"),{...K("Supabase","supabase","https://supabase.com"),w:1},K("Firebase","firebase","https://firebase.google.com"),K("Git","git","https://git-scm.com"),K("GitHub","github","https://github.com")]},
 {l:{en:"Focus",bn:"ফোকাস"},i:["Competitive Programming","AI-assisted Development","Prompt Engineering"]}];
 let cur=0;
 const th=(p,c)=>`<div class="thumb ${c||""}">${p.img?`<img src="${p.img}" alt="${p.n}" loading="lazy" onerror="this.remove()">`:""}<span>${p.n[0]}</span></div>`;
@@ -280,7 +300,7 @@ function render(){
   $$("[data-p]").forEach(e=>e.placeholder=t[e.dataset.p]);
   $$("[data-h]").forEach(e=>e.innerHTML=t[e.dataset.h]);
   $("#tl").innerHTML=TL.map(x=>`<li><small>${x.y}</small><b>${x[lang]}</b><ul>${x.b[lang].map(i=>`<li>${i}</li>`).join("")}</ul></li>`).join("");
-  $("#skills").innerHTML=SKG.map(g=>`<div class="sg"><small>${g.l[lang]}</small>${g.i.some(x=>typeof x==="string")?`<div class="chips">${g.i.map(x=>`<span>${x}</span>`).join("")}</div>`:`<div class="logos">${g.i.map(x=>`<a class="lg" href="${x.u}" target="_blank" rel="noopener noreferrer" aria-label="${x.n}" data-n="${x.n}">${ico(x.k,1)}</a>`).join("")}</div>`}</div>`).join("");
+  $("#skills").innerHTML=SKG.map(g=>`<div class="sg"><small>${g.l[lang]}</small>${g.i.some(x=>typeof x==="string")?`<div class="chips">${g.i.map(x=>`<span>${x}</span>`).join("")}</div>`:`<div class="logos">${g.i.map(x=>`<a class="lg${x.w?" new":""}" href="${x.u}" target="_blank" rel="noopener noreferrer" aria-label="${x.n}" data-n="${x.n}">${ico(x.k,1)}</a>`).join("")}</div>`}</div>`).join("");
   $("#also").innerHTML=CW.map(c=>`<li><b>${c.n}</b> <code>${c.t}</code><br>${c.d[lang]}${c.g?`<br><a class="btn s" href="${c.g}" target="_blank" rel="noopener noreferrer">${t.repo}</a>`:""}</li>`).join("");
   buildFlow();
   $$("[data-l]").forEach(b=>b.classList.toggle("on",b.dataset.l===lang));
@@ -317,7 +337,8 @@ function renderProject(p){
   <div class="ban">${th(p)}</div>
   <div class="ph2"><span class="stat ${p.ong?"o":""}">${p.ong?t.ong:t.live_s}</span><h2>${p.n}</h2><p class="sub">${p.d[lang]}</p></div>
   <div class="doc"><h3>${t.ov}</h3><p>${p.l[lang]}</p><h3>${t.hi}</h3><ul>${p.h[lang].map(x=>`<li>${x}</li>`).join("")}</ul><h3>${t.tech}</h3><div class="chips">${p.t.map(x=>`<span>${x}</span>`).join("")}</div></div>
-  <div class="row acts">${p.u?`<a class="btn gr" href="${p.u}" target="_blank" rel="noopener noreferrer">${t.demo}</a>`:`<span class="btn gr off">${t.soon}</span>`}${p.g?`<a class="btn s" href="${p.g}" target="_blank" rel="noopener noreferrer">${t.repo}</a>`:""}</div>`;
+  <div class="row acts">${p.u?`<a class="btn gr" href="${p.u}" target="_blank" rel="noopener noreferrer">${t.demo}</a>`:`<span class="btn gr off">${t.soon}</span>`}${p.g?`<a class="btn s" href="${p.g}" target="_blank" rel="noopener noreferrer">${t.repo}</a>`:""}</div>
+  <div class="pn">${[-1,1].map(d=>{const q=P[(P.indexOf(p)+d+P.length)%P.length];return `<a class="btn s" href="#p-${q.s}">${d<0?"&larr; ":""}${q.n}${d>0?" &rarr;":""}</a>`}).join("")}</div>`;
 }
 $("#stage").addEventListener("click",e=>{
   const g=e.target.closest(".go");if(g){location.hash="p-"+g.dataset.go;return}
@@ -332,6 +353,14 @@ $("#dots2").addEventListener("click",e=>{const b=e.target.closest("button");if(b
 addEventListener("resize",place);
 document.addEventListener("keydown",e=>{if($("#v-projects").classList.contains("on")){if(e.key==="ArrowLeft")setCur(cur-1);if(e.key==="ArrowRight")setCur(cur+1)}});
 
+/* touch devices: play the slide-open animation on the social buttons */
+function wave(){
+  if(!matchMedia("(hover:none)").matches)return;
+  $$(".sb").forEach((a,i)=>setTimeout(()=>{a.classList.add("open");setTimeout(()=>a.classList.remove("open"),900)},300+i*450));
+}
+$("#sb").addEventListener("touchstart",e=>{const a=e.target.closest(".sb");if(a)a.classList.add("open")},{passive:true});
+$("#sb").addEventListener("touchend",()=>setTimeout(()=>$$(".sb").forEach(a=>a.classList.remove("open")),500));
+addEventListener("scroll",()=>{const h=document.documentElement.scrollHeight-innerHeight;$("#pgb").style.width=(h>0?scrollY/h*100:0)+"%"},{passive:true});
 /* pages: one view per hash, e.g. #about */
 function closeMenu(){$("#mb").classList.remove("x");$("#menu").classList.remove("open");$("#mb").setAttribute("aria-expanded","false")}
 function route(){
@@ -340,9 +369,10 @@ function route(){
   const next=$("#v-"+n),now=$(".view.on"),act=n==="project"?"projects":n;
   $$("#links a,#menu a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+act));
   closeMenu();
-  if(now===next)return;
+  if(now===next){if(n==="project")scrollTo(0,0);return}
   if(now){now.classList.add("leave");setTimeout(()=>{$$(".view").forEach(v=>v.classList.remove("on","leave"));next.classList.add("on");place();scrollTo(0,0)},180)}
   else{next.classList.add("on");place()}
+  if(n==="home")setTimeout(wave,700);
 }
 const navH=NAV.map(n=>`<a href="#${n}" data-i="n_${n}"></a>`).join("");
 $("#links").innerHTML=navH;$("#menu").innerHTML=navH;
@@ -358,6 +388,7 @@ $("#sb").innerHTML=S.map(s=>`<a class="sb" href="${s[2]}" target="_blank" rel="n
 const av=$("#av");
 av.onerror=()=>{av.onerror=null;av.src="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#e8620c"/><text x="50" y="66" font-size="52" font-family="sans-serif" font-weight="700" fill="#fff" text-anchor="middle">A</text></svg>')};
 $("#ph").addEventListener("click",e=>{e.stopPropagation();e.currentTarget.classList.toggle("z")});
+$("#ph").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();$("#ph").classList.toggle("z")}});
 document.addEventListener("click",()=>$("#ph").classList.remove("z"));
 
 $$("[data-l]").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.l)));
